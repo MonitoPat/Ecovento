@@ -1,0 +1,181 @@
+:root {
+  --azul-principal: #2b44d8;
+  --azul-oscuro: #1d32b5;
+  --texto-oscuro: #111827;
+  --fondo-pagina: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--fondo-pagina);
+  color: var(--texto-oscuro);
+}
+
+.pagina {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-superior {
+  background-color: var(--azul-principal);
+  color: #ffffff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.logo-institucion {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.titulo-ecovento {
+  margin: 0;
+  font-size: clamp(2rem, 5.5vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  line-height: 1.05;
+}
+
+.seccion-principal {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Barra sin línea larga extra */
+.barra-pestanas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  background-color: #ffffff;
+}
+
+/* El borde completo (arriba, abajo y lados) vive solo en los 3 recuadros */
+.pestana {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 10px;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 700;
+  color: var(--texto-oscuro);
+  background-color: #ffffff;
+  border-top: 3px solid var(--azul-principal);
+  border-bottom: 3px solid var(--azul-principal);
+  border-right: 3px solid var(--azul-principal);
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.pestana:first-child {
+  border-left: 3px solid var(--azul-principal);
+}
+
+.pestana:hover {
+  background-color: #eef2ff;
+}
+
+#tab-reducir:checked ~ .barra-pestanas label[for="tab-reducir"],
+#tab-reciclar:checked ~ .barra-pestanas label[for="tab-reciclar"],
+#tab-reutilizar:checked ~ .barra-pestanas label[for="tab-reutilizar"] {
+  background-color: var(--azul-principal);
+  color: #ffffff;
+}
+
+.contenido-inferior {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.panel {
+  display: none;
+}
+
+#tab-reducir:checked ~ .contenido-inferior .panel-reducir,
+#tab-reciclar:checked ~ .contenido-inferior .panel-reciclar,
+#tab-reutilizar:checked ~ .contenido-inferior .panel-reutilizar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.columna-texto h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  color: var(--azul-oscuro);
+}
+
+.columna-texto p {
+  margin: 0 0 14px;
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  line-height: 1.65;
+}
+
+.columna-imagen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.imagen-contenido {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  max-height: 390px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+  .banner-superior {
+    padding: 22px 32px;
+    gap: 24px;
+  }
+
+  .logo-institucion {
+    width: 180px;
+    height: 80px;
+  }
+
+  .barra-pestanas {
+    grid-template-columns: repeat(3, minmax(150px, 210px));
+  }
+
+  .contenido-inferior {
+    padding: 34px 32px;
+  }
+
+  #tab-reducir:checked ~ .contenido-inferior .panel-reducir,
+  #tab-reciclar:checked ~ .contenido-inferior .panel-reciclar,
+  #tab-reutilizar:checked ~ .contenido-inferior .panel-reutilizar {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 36px;
+  }
+}
